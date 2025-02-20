@@ -30,7 +30,13 @@ const fetchPokemonDetail = async () => {
             id: data.id,
             name: data.name.charAt(0).toUpperCase() + data.name.slice(1),
             image: data.sprites.other["official-artwork"].front_default || "/default.png",
-            types: data.types.map(type => type.type.name)
+            types: data.types.map(type => type.type.name),
+            height: `${data.height / 10} (M)`,
+            weight: `${data.weight / 10} (KG)`,
+            abilities: data.abilities.map((a) => a.ability.name),
+            experience: data.base_experience,
+            stats: data.stats,
+            moves: data.moves,
         };
         console.log(pokemon.value);
     } catch (error) {
@@ -54,6 +60,9 @@ const catchPokemon = () => {
                 id: pokemon.value.id,
                 name: pokemon.value.name,
                 types: pokemon.value.types,
+                height: pokemon.value.height,
+                weight: pokemon.value.weight,
+                abilities: pokemon.value.abilities,
                 image: pokemon.value.image,
                 uniqueId: Date.now(),
             };
@@ -95,7 +104,10 @@ watch(() => route.params.name, fetchPokemonDetail, { immediate: true });
         </figure>
         <div class="card-body items-center text-center">
           <h2 class="card-title">{{ pokemon.name }}</h2>
-          <p>{{ pokemon.types.join(",") }}</p>
+          <p>type : {{ pokemon.types.join(",") }}</p>
+          <p>height : {{ pokemon.height }}</p>
+          <p>weight : {{ pokemon.weight }}</p>
+          <p>abilities : {{ pokemon.abilities }}</p>
           <div class="card-actions">
             <button
             @click="catchPokemon" 

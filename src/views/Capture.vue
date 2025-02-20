@@ -55,7 +55,10 @@ const confirmDelete = (pokemon) => {
           <img :src="pokemon.image" alt="">
         </div>
         <h2>{{ pokemon.name }}</h2>
-        <p>{{ pokemon.types.join(",") }}</p>
+        <p> type : {{ pokemon.types.join(",") }}</p>
+        <p>height : {{ pokemon.height }}</p>
+        <p> weight : {{ pokemon.weight }}</p>
+        <p> abilities : {{ pokemon.abilities }}</p>
       </div>
     </div>
   </div>
